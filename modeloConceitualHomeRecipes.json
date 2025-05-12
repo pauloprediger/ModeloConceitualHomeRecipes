@@ -1,0 +1,81 @@
+{
+  "entities": [
+    {
+      "name": "Usuário",
+      "attributes": [
+        { "name": "id_usuario", "type": "PK" },
+        { "name": "nome" },
+        { "name": "email" },
+        { "name": "senha" }
+      ]
+    },
+    {
+      "name": "Ingrediente",
+      "attributes": [
+        { "name": "id_ingrediente", "type": "PK" },
+        { "name": "nome" },
+        { "name": "quantidade" },
+        { "name": "unidade" },
+        { "name": "id_usuario", "type": "FK" }
+      ]
+    },
+    {
+      "name": "Receita",
+      "attributes": [
+        { "name": "id_receita", "type": "PK" },
+        { "name": "nome" },
+        { "name": "rendimento" },
+        { "name": "tempo_preparo" },
+        { "name": "id_usuario", "type": "FK" }
+      ]
+    },
+    {
+      "name": "Ingrediente_Receita",
+      "attributes": [
+        { "name": "id_receita", "type": "FK" },
+        { "name": "ordem_ingrediente", "type": "PK" },
+        { "name": "nome" },
+        { "name": "quantidade" },
+        { "name": "unidade" }
+      ]
+    },
+    {
+      "name": "Etapa_Preparo",
+      "attributes": [
+        { "name": "id_receita", "type": "FK" },
+        { "name": "ordem_etapa", "type": "PK" },
+        { "name": "descricao" }
+      ]
+    }
+  ],
+  "relationships": [
+    {
+      "name": "possui",
+      "entities": [
+        { "entity": "Usuário", "cardinality": "1" },
+        { "entity": "Ingrediente", "cardinality": "N" }
+      ]
+    },
+    {
+      "name": "cria",
+      "entities": [
+        { "entity": "Usuário", "cardinality": "1" },
+        { "entity": "Receita", "cardinality": "N" }
+      ]
+    },
+    {
+      "name": "utiliza",
+      "entities": [
+        { "entity": "Receita", "cardinality": "1" },
+        { "entity": "Ingrediente_Receita", "cardinality": "N" }
+      ]
+    },
+    {
+      "name": "é_composta_por",
+      "entities": [
+        { "entity": "Receita", "cardinality": "1" },
+        { "entity": "Etapa_Preparo", "cardinality": "N" }
+      ]
+    }
+  ]
+}
